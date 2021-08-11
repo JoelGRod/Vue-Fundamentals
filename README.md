@@ -1,4 +1,5 @@
-# 02-fundamentals
+# Vue fundamentals project
+Demonstrative purposes
 
 ## Project setup
 ```
