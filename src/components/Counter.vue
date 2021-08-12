@@ -1,6 +1,8 @@
 <template>
   <h2> {{ customTitle }} </h2>
-  <p> {{ counter }} <sup>2</sup> = {{ squareCounter }}  </p>
+  <!-- Html Elements with Data Attributes for tests -->
+  <p data-test-id="expressionCounter"> {{ counter }} <sup>2</sup> = {{ squareCounter }}  </p>
+  <p data-test-id="counter"> {{ counter }}  </p>
   <div>
       <button @click="increaseCounter" class="button">+1</button>
       <button @click="decreaseCounter" class="button">-1</button>
