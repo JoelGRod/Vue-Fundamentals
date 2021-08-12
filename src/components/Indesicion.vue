@@ -1,5 +1,5 @@
 <template>
-  <img src="https://via.placeholder.com/250" alt="background image">
+  <img v-if="image" :src="image" alt="background image">
   <div class="bg-dark"></div>
 
   <div class="indecision-container">
@@ -9,9 +9,9 @@
         placeholder="Make me a question">
       <p>Remember to end your question with ?</p>
 
-      <div>
+      <div v-if="isValidQuestion">
           <h2> {{ question }} </h2>
-          <h1>Si, No, ... pensando</h1>
+          <h1> {{ answer }} </h1>
       </div>
   </div>
 </template>
@@ -21,7 +21,41 @@ export default {
     name: "Indecision",
     data() {
         return {
-            question: ''
+            question: null,
+            answer: null,
+            image: null,
+            isValidQuestion: false,
+            spanishAnswers: {
+                "yes": "Si",
+                "no": "No",
+                "maybe": "Quizas"
+            }
+        }
+    },
+    methods: {
+        async getAnswer() {
+            try {
+                this.answer = "Thinking..."
+                const { answer, image } = 
+                    await fetch('https://yesno.wtf/api')
+                        .then( resp => resp.json() )
+                
+                this.answer = this.spanishAnswers[answer]
+
+                this.image = image
+            } catch (error) {
+                throw new Error(error)
+            }
+        }
+    },
+    watch: {
+        question( value, oldValue ) {
+            this.isValidQuestion = false
+
+            if(value.endsWith("?")) {
+                this.isValidQuestion = true
+                this.getAnswer()
+            }
         }
     }
     
