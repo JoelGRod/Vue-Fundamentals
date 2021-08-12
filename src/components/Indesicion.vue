@@ -41,7 +41,6 @@ export default {
                         .then( resp => resp.json() )
                 
                 this.answer = this.spanishAnswers[answer]
-
                 this.image = image
             } catch (error) {
                 throw new Error(error)
