@@ -1,11 +1,11 @@
 <template>
   <h2> {{ customTitle }} </h2>
   <!-- Html Elements with Data Attributes for tests -->
-  <p data-test-id="expressionCounter"> {{ counter }} <sup>2</sup> = {{ squareCounter }}  </p>
-  <p data-test-id="counter"> {{ counter }}  </p>
+  <p test-id="expressionCounter"> {{ counter }} <sup>2</sup> = {{ squareCounter }}  </p>
+  <p test-id="counter"> {{ counter }}  </p>
   <div>
-      <button @click="increaseCounter" class="button">+1</button>
-      <button @click="decreaseCounter" class="button">-1</button>
+      <button test-id="increaseBtn" @click="increaseCounter" class="button">+1</button>
+      <button test-id="decreaseBtn" @click="decreaseCounter" class="button">-1</button>
   </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         getSquareValue() {
-            console.log("Method square value")
+            // console.log("Method square value")
             return this.counter * this.counter
         },
         increaseCounter( event ) {
@@ -46,7 +46,7 @@ export default {
     },
     computed: {
         squareCounter() {
-            console.log("Computed square counter")
+            // console.log("Computed square counter")
             return this.counter * this.counter
         },
         customTitle() {
