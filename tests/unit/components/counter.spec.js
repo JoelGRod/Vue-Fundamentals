@@ -4,6 +4,7 @@ import Counter from '@/components/Counter';
 // Test suite
 describe('Counter Component', () => {
 
+    // Life cycle - beforeEach, afterEach, beforeAll, afterAll
     let wrapper;
     beforeEach(() => {
         wrapper = shallowMount(Counter);
@@ -94,7 +95,7 @@ describe('Counter Component', () => {
         // const wrapper = shallowMount(Counter);
         // Act
         const [ increaseBtn, decreaseBtn ] = wrapper.findAll('button');
-        
+
         await increaseBtn.trigger('click');
         await increaseBtn.trigger('click');
         await increaseBtn.trigger('click');
@@ -109,4 +110,37 @@ describe('Counter Component', () => {
 
     });
 
+    // Test VII: Read props
+    test('should stablish counter default value', () => {
+        
+        // Arrange
+        // Act
+        const counterValue = wrapper
+            .find('[test-id="counter"]')
+            .text();
+        const { start } = wrapper.props();
+        // Assert
+        expect( Number(counterValue) ).toBe( start );
+
+    });
+
+    // Test VIII: Send custom props to wrapper
+    test('h2 should show the given prop title', () => {
+
+        // Arrange (We need to send custom props only for this test)
+        const customTitle = 'Custom Counter';
+        const wrapper = shallowMount( Counter, {
+            props: {
+                title: customTitle
+            }
+        });
+        // Act
+        const { title } = wrapper.props();
+        const titleValue = wrapper
+            .find('h2')
+            .text();
+        // Assert
+        expect( title ).toBe( titleValue );
+        
+    });
 })
