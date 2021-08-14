@@ -51,6 +51,8 @@ export default {
         question( value, oldValue ) {
             this.isValidQuestion = false
 
+            console.log( { value } )
+
             if(value.endsWith("?")) {
                 this.isValidQuestion = true
                 this.getAnswer()
