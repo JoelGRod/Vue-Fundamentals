@@ -72,7 +72,17 @@ describe('Indesicion Component', () => {
 
     });
 
-    test('test on getAnswer - API fails', () => {
+    test('test on getAnswer - API fails', async () => {
+
+        // Arrange
+        fetch.mockImplementationOnce(() => Promise.reject('No API response'));
+        // Act
+        await wrapper.vm.getAnswer();
+        const img = wrapper.find('img');
+        // Assert
+        expect( img.exists() ).toBeFalsy();
+        expect( wrapper.vm.answer ).toBe( 'Cant\'t load from API' );
+        expect( wrapper.vm.image ).toBe( null );
 
     });
 });

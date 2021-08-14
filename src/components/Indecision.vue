@@ -43,7 +43,10 @@ export default {
                 this.answer = this.spanishAnswers[answer]
                 this.image = image
             } catch (error) {
-                throw new Error(error)
+                console.log( 'Indecision component: ', error)
+                this.image = null
+                this.answer = 'Cant\'t load from API'
+                // throw new Error(error)
             }
         }
     },
